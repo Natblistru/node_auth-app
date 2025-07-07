@@ -4,6 +4,8 @@ import { emailService } from '../services/email.service.js';
 
 import { userService } from '../services/user.service.js';
 
+import { validateEmail } from './auth.controller.js';
+
 import bcrypt from 'bcrypt';
 
 const changeName = async (req, res) => {
@@ -74,6 +76,12 @@ const changeEmail = async (req, res) => {
 
     `,
   });
+
+  const emailError = validateEmail(newEmail);
+
+  if (emailError) {
+    return res.status(400).json({ message: emailError });
+  }
 
   user.email = newEmail;
 

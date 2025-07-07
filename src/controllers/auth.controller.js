@@ -14,17 +14,15 @@ import { emailService } from '../services/email.service.js';
 
 import { v4 as uuidv4 } from 'uuid';
 
-function validateEmail(value) {
-  if (!value) {
-    return 'Email is required';
-  }
-
-  const emailPattern = /^[\w.+-]+@([\w-]+\.){1,3}[\w-]{2,}$/;
+const validateEmail = (value) => {
+  const emailPattern = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   if (!emailPattern.test(value)) {
     return 'Email is not valid';
   }
-}
+
+  return undefined;
+};
 
 function validatePassword(value) {
   if (!value) {
